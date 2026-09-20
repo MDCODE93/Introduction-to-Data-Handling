@@ -239,7 +239,9 @@ def push_to_github(message="Update Streamlit app and backend data"):
 	Streamlit Cloud deploys from GitHub, so pushing here triggers a redeploy.
 	"""
 	repo_dir = Path(__file__).resolve().parent
-	files = ["app.py", "assignment_2.py", "requirements.txt", "PanelData_backend.xlsx"]
+	# requirements.txt lives at the repository root (Streamlit Cloud cannot parse
+	# the space-containing path to this folder), so reference it two levels up.
+	files = ["app.py", "assignment_2.py", "../../requirements.txt", "PanelData_backend.xlsx"]
 
 	def git(*args):
 		return subprocess.run(
