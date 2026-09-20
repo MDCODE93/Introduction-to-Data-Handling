@@ -1,0 +1,126 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+
+\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=2pt}
+\titleformat{\section}{\large\bfseries\color{black!85}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{1.1em}{0.4em}
+\titlespacing*{\subsection}{0pt}{0.7em}{0.2em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Social Data Science --- Pre-semester Reading Plan}
+\fancyhead[R]{\small Autumn 2026, AAU}
+\fancyfoot[C]{\small \thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\title{\vspace{-1.5cm}\textbf{Pre-semester Reading Plan}\\[0.2em]
+\large Social Data Science specialization --- MSc Economics, AAU\\[0.1em]
+\normalsize Autumn 2026 (modules: Data Handling \& Applied ML, NLP \& Network Analysis, Semester Project)}
+\author{}
+\date{Plan window: 19 May 2026 -- 31 August 2026 \quad (15 weeks)}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\vspace{-1.6em}
+
+\section*{Overview}
+Fifteen-week ramp from thesis-defence wind-down to semester start. Weeks 1--4 are light (1--2 evenings/week, $\sim$3 h); weeks 5--15 ramp to 8--10 h/week. Free items are marked with a dagger ($\dagger$). Each phase has a concrete deliverable so progress is verifiable. Project framing: \textbf{Health Economics with SHARE} (Survey on Health, Ageing and Retirement in Europe).
+
+\textit{Books already on the shelf} (used throughout, primary in Phases 1--2):
+\begin{itemize}
+  \item Rogel-Salazar, J. --- \textit{Data Science and Analytics with Python} (CRC, 2017). \textbf{[RS-1]}
+  \item Rogel-Salazar, J. --- \textit{Advanced Data Science and Analytics with Python} (CRC, 2020). \textbf{[RS-2]}
+\end{itemize}
+
+\section{Phase 0 --- Decompression \& orientation (weeks 1--2, 19 May -- 1 Jun)}
+\textit{Goal: pick a project topic, install the toolchain.}
+\begin{itemize}
+  \item Skim B\"orsch-Supan (2013), \textit{Data Resource Profile: SHARE}, IJE 42(4)$^\dagger$, plus \textit{SHARE Wave 9 Methodology} (Ch. 1--3)$^\dagger$.
+  \item Browse the \textit{SHARE Compendium of Research}$^\dagger$ TOC; bookmark 5--10 papers near your interest.
+  \item Set up a conda env: \texttt{pandas, scikit-learn, statsmodels, linearmodels, networkx, nltk, spacy, gensim, matplotlib, seaborn, jupyterlab}.
+  \item \textbf{Deliverable:} 1-page note with 3 candidate SHARE project questions.
+\end{itemize}
+
+\section{Phase 1 --- ML foundations refresh (weeks 3--5, 2 -- 22 Jun)}
+\textit{Goal: ground the Python/ML basics; use \textbf{RS-1} as the spine and ISLP for the statistical theory.}
+\begin{itemize}
+  \item \textbf{RS-1 Ch. 1--3} --- Python/NumPy/pandas refresher, data wrangling, exploratory analysis.
+  \item \textbf{RS-1 Ch. 4--5} --- statistics + linear regression in Python; pair with \textbf{ISLP Ch. 2--3}$^\dagger$ for the theory.
+  \item \textbf{RS-1 Ch. 6} (classification) alongside \textbf{ISLP Ch. 4}$^\dagger$ and \textbf{G\'eron Ch. 1--3} --- replicate one end-to-end pipeline on a SHARE subset.
+  \item \textbf{VanderPlas Ch. 3 (pandas) + Ch. 4 (matplotlib)}$^\dagger$ as reference only.
+  \item \textbf{Deliverable:} notebook that loads easySHARE, cleans it, and runs logistic regression on a binary outcome with train/test split.
+\end{itemize}
+
+\section{Phase 2 --- Supervised \& unsupervised ML depth (weeks 6--8, 23 Jun -- 13 Jul)}
+\textit{Switch the spine to \textbf{RS-2} (advanced) once RS-1 is finished.}
+\begin{itemize}
+  \item \textbf{RS-1 Ch. 7--8} (trees, ensembles, clustering, dimensionality reduction) bridged with \textbf{ISLP Ch. 5--6}$^\dagger$ (resampling, regularisation) + labs.
+  \item \textbf{RS-2 Ch. 1--3} (advanced regression, ensembles, model selection) with \textbf{ISLP Ch. 8}$^\dagger$ and \textbf{G\'eron Ch. 6--7}.
+  \item \textbf{RS-2 Ch. 4--5} (Bayesian methods, dimensionality reduction in depth) with \textbf{ISLP Ch. 12}$^\dagger$ and \textbf{G\'eron Ch. 8--9}.
+  \item Skim \textbf{ISLP Ch. 10}$^\dagger$ (deep learning intro) --- conceptual only.
+  \item \textbf{Deliverable:} notebook comparing Lasso, Random Forest, and Gradient Boosting on the same SHARE outcome with cross-validated metrics and SHAP plots.
+\end{itemize}
+
+\section{Phase 3 --- NLP, classical track (weeks 9--10, 14 -- 27 Jul)}
+\textit{Matches the syllabus's explicit ``non-neural'' focus.}
+\begin{itemize}
+  \item \textbf{RS-2}: the NLP chapter (text analytics / topic modelling) for the Python-first treatment.
+  \item \textbf{Jurafsky \& Martin (3e draft)}$^\dagger$ Ch. 2 (regex/tokenisation), 3 (n-grams), 4 (naive Bayes + sentiment), 5 (logistic regression for text), 6 (vector semantics: TF-IDF, PMI, SVD), 17 (NER), 21 (lexicons/sentiment).
+  \item \textbf{NLTK book}$^\dagger$ Ch. 1, 3, 5, 6, 7 --- work the exercises.
+  \item \textbf{Bengfort, Bilbro \& Ojeda} Ch. 1--5 for sklearn-style text pipelines.
+  \item \textbf{Deliverable:} sentiment + TF-IDF classifier on a public corpus (e.g.\ Reuters), end-to-end pipeline.
+\end{itemize}
+
+\section{Phase 4 --- Network analysis (weeks 11--12, 28 Jul -- 10 Aug)}
+\begin{itemize}
+  \item \textbf{RS-2}: the network-analysis chapter (graphs in Python) as a primer before Menczer.
+  \item \textbf{Menczer, Fortunato \& Davis} Ch. 1--6 (graphs, centrality, small-world, scale-free, communities) --- do the NetworkX notebooks.
+  \item \textbf{Barab\'asi}$^\dagger$ Ch. 2--4, 9 as conceptual companion.
+  \item \textit{Optional:} Newman Ch. 7 + 14 for spectral / community-detection maths.
+  \item \textbf{Deliverable:} NetworkX notebook with degree distribution, centrality ranking, and Louvain communities on one real network.
+\end{itemize}
+
+\section{Phase 5 --- Health economics \& SHARE project prep (weeks 13--15, 11 -- 31 Aug)}
+\textit{Run in parallel with Phase 4 if time permits.}
+\begin{itemize}
+  \item \textbf{Jones --- \textit{Applied Health Economics}}: chapters on health production, insurance demand, and panel methods ($\sim$4 chapters).
+  \item \textbf{Deb, Norton \& Manning} Ch. 1--4 (two-part, count, nonlinear panel) --- translate one Stata example to Python (\texttt{statsmodels} / \texttt{linearmodels}).
+  \item \textbf{Cunningham --- \textit{The Mixtape}}$^\dagger$: refresh DiD and panel FE.
+  \item 3--5 SHARE-specific papers from the Phase 0 shortlist; write a one-paragraph summary of each.
+  \item \textbf{easySHARE Release Guide}$^\dagger$ --- full read; mark variables for the project.
+  \item \textbf{Deliverable:} 2-page project pre-proposal --- research question, SHARE waves/variables, ML/NLP/network angle to satisfy the SDS module, candidate methods, identification strategy.
+\end{itemize}
+
+\section{Cross-cutting habits}
+\begin{itemize}
+  \item One Git repo \texttt{sds-prep/} with subfolders \texttt{ml/}, \texttt{nlp/}, \texttt{networks/}, \texttt{share/}; each notebook ends with a 5-bullet \textit{what I learned} cell.
+  \item One Zotero / BibTeX file \texttt{sds\_prep.bib} updated as you read --- feeds directly into the semester project.
+  \item Weekly 30-min Friday review: re-skim the week's notes, push commits.
+\end{itemize}
+
+\section{Trimming options if time gets tight}
+\begin{itemize}
+  \item Drop G\'eron deep-learning chapters (separate spring module).
+  \item Drop Newman; Menczer is enough.
+  \item Replace Bengfort with spaCy tutorials.
+  \item Skip Deb/Norton/Manning if the thesis already covered FE/IV thoroughly.
+\end{itemize}
+
+\section{Priority order if you can only do half}
+RS-1 Ch. 1--6 $\rightarrow$ ISLP labs (Ch. 2--6, 8) $\rightarrow$ RS-2 selected chapters $\rightarrow$ Jurafsky \& Martin Ch. 2--6 $\rightarrow$ Menczer Ch. 1--4 $\rightarrow$ SHARE methodology + easySHARE guide $\rightarrow$ Jones (selected chapters).
+
+\vfill
+\begin{center}\small\itshape Compiled \today.\end{center}
+
+\end{document}

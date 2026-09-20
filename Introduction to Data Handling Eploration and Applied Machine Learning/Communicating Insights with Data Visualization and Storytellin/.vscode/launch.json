@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run China-EU CO2 analysis",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/create_china_eu_subset.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
