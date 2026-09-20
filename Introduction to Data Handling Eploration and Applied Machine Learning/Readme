@@ -3,4 +3,5 @@ AI tools used: Claude Opus 4.8 medium
 For assignment 2 I mainly used it for the visuals of the applications.
 
 Then I used it for some of the cleaning of the data where I could not get the code correct even though most of it
-is based on the previous lectures.
+is based on the previous lectures. Especially when I tried to push the requirements.txt I could not have it in the follder regarding the application.
+So I used it to fix the path for share.streamlit.io.
