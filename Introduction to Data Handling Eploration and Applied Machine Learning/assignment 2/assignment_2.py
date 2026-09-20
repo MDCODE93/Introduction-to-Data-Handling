@@ -233,8 +233,44 @@ def create_denmark_map(df, output_path):
 	figure.write_html(output_path, include_plotlyjs="cdn")
 
 
+def push_to_github(message="Update Streamlit app and backend data"):
+	"""Commit the deploy-relevant files and push them to GitHub.
+
+	Streamlit Cloud deploys from GitHub, so pushing here triggers a redeploy.
+	"""
+	repo_dir = Path(__file__).resolve().parent
+	files = ["app.py", "assignment_2.py", "requirements.txt", "PanelData_backend.xlsx"]
+
+	def git(*args):
+		return subprocess.run(
+			["git", *args], cwd=repo_dir, capture_output=True, text=True
+		)
+
+	git("add", *files)
+
+	# Only commit when at least one of the tracked files actually changed.
+	status = git("status", "--porcelain", "--", *files)
+	if not status.stdout.strip():
+		print("No changes to push to GitHub.")
+		return
+
+	commit = git("commit", "-m", message)
+	if commit.returncode != 0:
+		print("git commit failed:")
+		print(commit.stdout or commit.stderr)
+		return
+
+	push = git("push", "origin", "HEAD")
+	if push.returncode != 0:
+		print("git push failed:")
+		print(push.stderr or push.stdout)
+		return
+
+	print("Pushed latest app and data to GitHub. Streamlit Cloud will redeploy.")
+
+
 def main():
-	data_path = Path(__file__).resolve().parents[1] / "PanelData.xlsx"
+	data_path = Path(__file__).resolve().parents[1] / "Assignments" / "PanelData.xlsx"
 	panel_data = pd.read_excel(data_path)
 	describe_dataset(panel_data)
 
@@ -255,6 +291,9 @@ def main():
 	backend_path = Path(__file__).resolve().parent / "PanelData_backend.xlsx"
 	panel_data.to_excel(backend_path, index=False)
 	print(f"Backend data saved to: {backend_path}")
+
+	# Push the refreshed app and data to GitHub so Streamlit Cloud redeploys.
+	push_to_github()
 
 	app_path = Path(__file__).resolve().parent / "app.py"
 	print("Starting Streamlit at http://localhost:8501")
